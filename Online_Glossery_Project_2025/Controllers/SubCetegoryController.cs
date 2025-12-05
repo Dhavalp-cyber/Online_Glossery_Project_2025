@@ -67,20 +67,29 @@ namespace Online_Glossery_Project_2025.Controllers
             {
                 return NotFound();
             }
-            return RedirectToAction("GetAllSubCetegory");
-
-
+            return View(subcategory);
         }
+
         [HttpPost]
-        public IActionResult DeleteConfirmed(int id)
+
+        public IActionResult DeleteSubCategory(int SubCetegoryID)
         {
-            var subcategory = db.subCetegories.Find(id);
-            if (subcategory != null)
+            var sub = db.subCetegories.Find(SubCetegoryID);
+
+            bool hasProducts = db.products
+                                 .Any(p => p.SubCetegoryID == SubCetegoryID);
+
+            if (hasProducts)
             {
-                db.subCetegories.Remove(subcategory);
-                db.SaveChanges();
+                TempData["Error"] = "Cannot delete! First You delet All Product Releted tu this SubCetegory";
+                return RedirectToAction("GetAllSubCetegory" , new { id = sub.CetegoryID });
             }
-            return RedirectToAction("GetAllSubCetegory", new { id = subcategory?.CetegoryID });
+
+            db.subCetegories.Remove(sub);
+            db.SaveChanges();
+
+            return RedirectToAction("GetAllSubCetegory" , new { id = sub.CetegoryID });
         }
+
     }
 }

@@ -1,10 +1,18 @@
 ﻿@model IEnumerable<Online_Glossery_Project_2025.Models.SubCetegory>
 
 @{
-    ViewData["Title"] = "GetAllSubCetegory";
+    ViewData["Title"] = "SubCetegory";
 }
 
-<h1>GetAllSubCetegory</h1>
+<h1>SubCetegory</h1>
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
+
 
 <p>
 </p>
@@ -18,19 +26,22 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-               @item.SubCetegoryName
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.SubCetegoryID">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.SubCetegoryID">Delete</a>
-            </td>
-        </tr>
-}
-         <div>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.SubCetegoryName
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.SubCetegoryID">Edit</a> |
+                    <a asp-action="Delete" asp-controller="SubCetegory" asp-route-id="@item.SubCetegoryID">Delete</a>
+                </td>
+            </tr>
+        }
+
+        <div>
             <a asp-controller="Cetegory" asp-action="GetAllCetegory">Back to List</a>
-        </div> 
+        </div>
+
     </tbody>
 </table>

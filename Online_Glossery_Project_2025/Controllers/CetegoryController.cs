@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Online_Glossery_Project_2025.Data;
 using Online_Glossery_Project_2025.Models;
 
@@ -63,16 +64,23 @@ namespace Online_Glossery_Project_2025.Controllers
                 return NotFound();
             }
             
-            return RedirectToAction("GetAllCetegory");
+            return View(category);
         }
         [HttpPost]
         public IActionResult DeleteConfirmed(int id)
         {
             var category = db.cetegories.Find(id);
-            if (category == null)
+
+            bool Subcetegory = db.subCetegories
+                                 .Any(p => p.CetegoryID == id);
+
+            if (Subcetegory)
             {
-                return NotFound();
+                TempData["Error"] = "Cannot delete! First You delet All Subcetegory Releted tu this Cetegory";
+                return RedirectToAction("GetAllCetegory");
             }
+
+            
             db.cetegories.Remove(category);
             db.SaveChanges();
             return RedirectToAction("GetAllCetegory");

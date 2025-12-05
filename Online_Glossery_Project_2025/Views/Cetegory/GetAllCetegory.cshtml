@@ -1,11 +1,17 @@
 ﻿@model IEnumerable<Online_Glossery_Project_2025.Models.Cetegory>
 
 @{
-    ViewData["Title"] = "GetAllCetegory";
+    ViewData["Title"] = "Cetegory";
 }
 
-<h1>GetAllCetegory</h1>
-
+<h1>Cetegory</h1>
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @TempData["Error"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+}
 <p>
     <a asp-action="Create">Create New</a>
 </p>

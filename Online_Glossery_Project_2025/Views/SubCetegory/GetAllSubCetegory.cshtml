@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Online_Glossery_Project_2025.Models.SubCetegory>
+
+@{
+    ViewData["Title"] = "GetAllSubCetegory";
+}
+
+<h1>GetAllSubCetegory</h1>
+
+<p>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                SubCetegoryName
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+               @item.SubCetegoryName
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SubCetegoryID">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.SubCetegoryID">Delete</a>
+            </td>
+        </tr>
+}
+         <div>
+            <a asp-controller="Cetegory" asp-action="GetAllCetegory">Back to List</a>
+        </div> 
+    </tbody>
+</table>

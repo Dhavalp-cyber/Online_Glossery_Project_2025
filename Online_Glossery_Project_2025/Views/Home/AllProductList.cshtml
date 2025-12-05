@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Online_Glossery_Project_2025.Models.Product>
+
+@{
+    ViewData["Title"] = "AllProductList";
+}
+
+@foreach (var item in Model)
+{
+    <div class="card d-inline-block" style="width: 20rem; margin:30px">
+
+        @if (item.Image == null || item.Image.Length == 0)
+        {
+            <img src="~/css/images/download.png"  
+                 class="card-img-top"
+                 alt="No Image Available" />
+        }
+        else
+        {
+            <img src="@Url.Action("DisplayProductImage", "Product", new { id = item.Id })"
+                 class="card-img-top"
+                 alt="@item.ProductName" />
+        }
+
+        <div class="card-body">
+            <h5 class="card-title">@item.ProductName</h5>
+            <a href="#" class="btn btn-primary">@item.Cost</a>
+        </div>
+    </div>
+}
+
+
+

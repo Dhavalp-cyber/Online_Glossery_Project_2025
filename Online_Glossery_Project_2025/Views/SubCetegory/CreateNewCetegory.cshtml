@@ -1,0 +1,13 @@
+﻿@model Online_Glossery_Project_2025.Models.SubCetegory
+
+<form asp-action="CreateNewCetegory">
+    <input type="hidden" asp-for="CetegoryID" />
+
+    <div class="form-group">
+        <label asp-for="SubCetegoryName"></label>
+        <input asp-for="SubCetegoryName" class="form-control" />
+        <span asp-validation-for="SubCetegoryName"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

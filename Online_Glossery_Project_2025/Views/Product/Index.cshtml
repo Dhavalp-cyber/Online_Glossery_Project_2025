@@ -1,0 +1,44 @@
+﻿@model List<Online_Glossery_Project_2025.Models.Product>
+
+@{
+    var Categories = ViewBag.Categories as List<Cetegory>;
+    var subCategories = ViewBag.SubCategories as List<SubCetegory>;
+    int i = 1;
+}
+
+<h2>Product List</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Cost</th>
+            <th>Image</th>
+            <th>Category</th>
+            <th>Subcategory</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            var categoryName = Categories.FirstOrDefault(c => c.CetegoryID == p.CetegoryID)?.CetegoryName ?? "";
+            var subCategoryName = subCategories.FirstOrDefault(s => s.SubCetegoryID == p.SubCetegoryID)?.SubCetegoryName ?? "";
+
+            <tr>
+                <td>@i</td>
+                <td>@p.ProductName</td>
+                <td>@p.Cost</td>
+                <td>
+                    <img src="@Url.Action("DisplayProductImage", "Product", new { id = p.Id })"
+                         width="150" height="150" />
+
+                </td>
+                <td>@categoryName</td>
+                <td>@subCategoryName</td>
+            </tr>
+
+            i++;
+        }
+    </tbody>
+</table>

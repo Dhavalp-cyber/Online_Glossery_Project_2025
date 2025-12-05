@@ -1,0 +1,24 @@
+﻿@model Online_Glossery_Project_2025.ViewModel.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+<div class="text-danger">
+    @Html.ValidationSummary(false)
+</div>
+<form method="post" asp-controller="LoginLogout" asp-action="Login">
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input type="text" asp-for="Email" placeholder="Enter Email" class="form-control" autocomplete="off" id="Email" />
+        <br />
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input type="password" asp-for="Password" placeholder="Enter password" class="form-control" autocomplete="off" id="Password" />
+        <br />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Login</button>
+
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Baack</a>
+</form>

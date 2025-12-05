@@ -1,0 +1,123 @@
+﻿@{
+    var isLogin = Context.Request.Cookies["IsLogin"];
+    var email = Context.Request.Cookies["Email"];
+    var loggedUser = ViewBag.userdata as Online_Glossery_Project_2025.Models.MyUser;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Online_Glossery_Project_2025</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+            <div class="container-fluid">
+
+                <!-- Brand -->
+                <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="AllProductList">
+                    Online Glossery
+                </a>
+
+                <!-- Toggle -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Menu -->
+                <div class="collapse navbar-collapse" id="mainNav">
+                    @if (isLogin == "true")
+                    {
+                        <!-- Left side -->
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="AllProductList">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+
+                            @if (email == "dhaval@gmail.com")
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Admin" asp-action="GetData">Admin Panel</a>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    
+
+                    <!-- Right side -->
+                    <ul class="navbar-nav ms-auto">
+
+                        @if (isLogin == "true")
+                        {
+                            <!-- Email -->
+                            <li class="nav-item d-flex align-items-center me-3">
+                                <span class="fw-bold">@email</span>
+                            </li>
+
+                            <!-- Profile icon -->
+                            <li class="nav-item me-3">
+                                <a asp-controller="Home" asp-action="Profile" class="btn btn-light rounded-circle p-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                         fill="currentColor" class="bi bi-person">
+                                        <path d="M8 8a3 3 0 1 0-3-3 3 3 0 0 0 3 3" />
+                                        <path d="M14 14s-1-4-6-4-6 4-6 4 3 1 6 1 6-1 6-1" />
+                                    </svg>
+                                </a>
+                            </li>
+
+                            <!-- Logout button -->
+                            <li class="nav-item">
+                                <a class="btn btn-outline-dark btn-sm" asp-controller="LoginLogout" asp-action="Logout">Logout</a>
+                            </li>
+
+                            <!-- Manage links -->
+                            <li class="nav-item dropdown ms-3">
+                                <a class="btn btn-outline-secondary btn-sm dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                    Manage
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-controller="Product" asp-action="AddProduct">Add Product</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Cetegory" asp-action="GetAllCetegory">Manage Category</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="LoginLogout" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="LoginLogout" asp-action="Register">Register</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-3">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top py-3 mt-4">
+        <div class="container text-center">
+            &copy;Online Glossery Project
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

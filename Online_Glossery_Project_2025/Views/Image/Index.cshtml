@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Online_Glossery_Project_2025.Models.Images>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var img in Model)
+        {
+            <tr>
+
+                <td>@img.Name</td>
+                <td>
+                    <img src="@Url.Action("DisplayImage", "Image", new { id = img.Id })"
+                         width="150" height="150" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

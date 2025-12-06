@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Online_Glossery_Project_2025.Models.Product>
+
+<h2>My Cart</h2>
+
+@if (!Model.Any())
+{
+    <p>Your cart is empty.</p>
+}
+else
+{
+    foreach (var item in Model)
+    {
+        <div class="card m-3" style="width:20rem;">
+            <img src="@Url.Action("DisplayProductImage", "Product", new { id = item.Id })"
+                 class="card-img-top" />
+
+            <div class="card-body">
+                <h5>@item.ProductName</h5>
+                <p>$@item.Cost</p>
+
+                <a asp-controller="AddToCart"
+                   asp-action="Remove"
+                   asp-route-id="@item.Id"
+                   class="btn btn-danger">Remove</a>
+            </div>
+        </div>
+    }
+
+    <a asp-controller="AddToCart" asp-action="Clear" class="btn btn-dark">Clear Cart</a>
+}

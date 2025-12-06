@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Online_Glossery_Project_2025.Data;
@@ -16,7 +17,6 @@ namespace Online_Glossery_Project_2025.Controllers
             this.context = context;
 
         }
-
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             LoadData().Wait();
@@ -24,7 +24,7 @@ namespace Online_Glossery_Project_2025.Controllers
             ViewBag.userdata = user;
             base.OnActionExecuting(context);
         }
-
+        
         public async Task<string> LoadData()
         {
             string value = Request.Cookies["Email"];
@@ -38,6 +38,8 @@ namespace Online_Glossery_Project_2025.Controllers
             var users = context.users.ToList();
             return View(users);
         }
+
+        [Authorize]
 
         public IActionResult Create()
         {

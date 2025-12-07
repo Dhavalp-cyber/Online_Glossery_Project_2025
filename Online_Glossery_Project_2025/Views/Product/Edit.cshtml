@@ -1,51 +1,70 @@
 ﻿@model Online_Glossery_Project_2025.Models.Product
 
-@{
-    ViewData["Title"] = "Edit";
-}
+<div class="container mt-5">
 
-<h1>Edit</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
 
-<h4>Product</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="UpdateProduct" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="ProductName" class="control-label"></label>
-                <input asp-for="ProductName" class="form-control" />
-                <span asp-validation-for="ProductName" class="text-danger"></span>
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-warning text-white text-center">
+                    <h4 class="mb-0">Edit Product</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <form asp-action="UpdateProduct" enctype="multipart/form-data">
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <!-- Product Name -->
+                        <div class="mb-3">
+                            <label asp-for="ProductName" class="form-label"></label>
+                            <input asp-for="ProductName" class="form-control" />
+                            <span asp-validation-for="ProductName" class="text-danger"></span>
+                        </div>
+
+                        <!-- Cost -->
+                        <div class="mb-3">
+                            <label asp-for="Cost" class="form-label"></label>
+                            <input asp-for="Cost" class="form-control" />
+                            <span asp-validation-for="Cost" class="text-danger"></span>
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div class="mb-3">
+                            <label asp-for="Image" class="form-label"></label>
+                            <input type="file" name="imageFile" class="form-control" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+
+                        <!-- Category ID -->
+                        <div class="mb-3">
+                            <label asp-for="CetegoryID" class="form-label"></label>
+                            <input asp-for="CetegoryID" class="form-control" />
+                            <span asp-validation-for="CetegoryID" class="text-danger"></span>
+                        </div>
+
+                        <!-- SubCategory ID -->
+                        <div class="mb-3">
+                            <label asp-for="SubCetegoryID" class="form-label"></label>
+                            <input asp-for="SubCetegoryID" class="form-control" />
+                            <span asp-validation-for="SubCetegoryID" class="text-danger"></span>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-warning">Save</button>
+                            <a asp-action="Index" class="btn btn-secondary">← Back</a>
+                        </div>
+
+                    </form>
+
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Cost" class="control-label"></label>
-                <input asp-for="Cost" class="form-control" />
-                <span asp-validation-for="Cost" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <input  type="file" name="imageFile" class="form-control" />
-                <span asp-validation-for="Image" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CetegoryID" class="control-label"></label>
-                <input asp-for="CetegoryID" class="form-control" />
-                <span asp-validation-for="CetegoryID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SubCetegoryID" class="control-label"></label>
-                <input asp-for="SubCetegoryID" class="form-control" />
-                <span asp-validation-for="SubCetegoryID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
-

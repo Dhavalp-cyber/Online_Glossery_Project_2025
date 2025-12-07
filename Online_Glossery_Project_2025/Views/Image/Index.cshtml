@@ -1,32 +1,35 @@
 ﻿@model IEnumerable<Online_Glossery_Project_2025.Models.Images>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<div class="container mt-5">
 
-<h1>Index</h1>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold">Images</h2>
+        <a asp-action="Create" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Upload New
+        </a>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Image</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var img in Model)
-        {
-            <tr>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var img in Model)
+                {
+                    <tr>
+                        <td>@img.Name</td>
+                        <td>
+                            <img src="@Url.Action("DisplayImage", "Image", new { id = img.Id })"
+                                 class="img-thumbnail" style="width:150px; height:150px;" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-                <td>@img.Name</td>
-                <td>
-                    <img src="@Url.Action("DisplayImage", "Image", new { id = img.Id })"
-                         width="150" height="150" />
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+</div>

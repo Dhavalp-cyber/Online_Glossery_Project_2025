@@ -1,35 +1,57 @@
 ﻿@model Online_Glossery_Project_2025.Models.Images
 
 @{
-    ViewData["Title"] = "ImageUpload";
+    ViewData["Title"] = "Image Upload";
 }
 
-<h1>ImageUpload</h1>
+<div class="container mt-5">
 
-<h4>Images</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post" enctype="multipart/form-data" asp-action="ImageUpload">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-success text-white text-center">
+                    <h4 class="mb-0">Upload Image</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <form method="post" enctype="multipart/form-data" asp-action="ImageUpload">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <!-- Image File -->
+                        <div class="mb-3">
+                            <label asp-for="Image" class="form-label"></label>
+                            <input type="file" name="imageFile" class="form-control" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                Upload
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Image" class="control-label"></label>
-                <span asp-validation-for="Image" class="text-danger"></span>
-                <input type="file" name="imageFile" />
+
+            <div class="text-center mt-3">
+                <a asp-action="Index" class="btn btn-secondary">
+                    ← Back to List
+                </a>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
-

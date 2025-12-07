@@ -4,57 +4,87 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div class="container mt-4">
 
-<h4>MyUser</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">Create User</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label asp-for="Username" class="form-label"></label>
+                            <input asp-for="Username" class="form-control" />
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="mb-3">
+                            <label asp-for="Phone" class="form-label"></label>
+                            <input asp-for="Phone" class="form-control" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+
+                        <!-- IsActive -->
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" asp-for="IsActive" />
+                            <label class="form-check-label" asp-for="IsActive"></label>
+                        </div>
+
+                        <!-- Role -->
+                        <div class="mb-3">
+                            <label asp-for="Role" class="form-label"></label>
+                            <input asp-for="Role" class="form-control" />
+                            <span asp-validation-for="Role" class="text-danger"></span>
+                        </div>
+
+                        <!-- IsLogin -->
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" asp-for="Islogin" />
+                            <label class="form-check-label" asp-for="Islogin"></label>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                Create
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+
+            <div class="text-center mt-3">
+                <a asp-action="GetData" class="text-decoration-none">
+                    ← Back to List
+                </a>
             </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Role" class="control-label"></label>
-                <input asp-for="Role" class="form-control" />
-                <span asp-validation-for="Role" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Islogin" /> @Html.DisplayNameFor(model => model.Islogin)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="GetData">Back to List</a>
 </div>
-

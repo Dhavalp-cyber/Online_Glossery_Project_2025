@@ -1,60 +1,80 @@
 ﻿@model Online_Glossery_Project_2025.Models.Product
 
-<h2>Add Product</h2>
+<div class="container mt-5">
 
-<form method="get" asp-action="AddProduct">
-    <div class="mb-3">
-        <label class="form-label">Category</label>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
 
-        <select class="form-select" name="Id" onchange="this.form.submit()">
-            <option value="">-- Select Category --</option>
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4 class="mb-0">Add Product</h4>
+                </div>
 
-            @foreach (var cat in ViewBag.Categories)
-            {
-                if (Model.CetegoryID == cat.CetegoryID)
-                {
-                    <option value="@cat.CetegoryID" selected>@cat.CetegoryName</option>
-                }
-                else
-                {
-                    <option value="@cat.CetegoryID">@cat.CetegoryName</option>
-                }
-            }
-        </select>
+                <div class="card-body">
+
+                    <!-- Category Selection (GET Form) -->
+                    <form method="get" asp-action="AddProduct" class="mb-4">
+                        <div class="mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-select" name="Id" onchange="this.form.submit()">
+                                <option value="">-- Select Category --</option>
+                                @foreach (var cat in ViewBag.Categories)
+                                {
+                                    <option value="@cat.CetegoryID" @(Model.CetegoryID == cat.CetegoryID ? "selected" : "")>
+                                        @cat.CetegoryName
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                    </form>
+
+                    <!-- Product Form (POST) -->
+                    <form method="post" asp-action="AddProduct" enctype="multipart/form-data">
+
+                        <input type="hidden" asp-for="CetegoryID" />
+
+                        <!-- SubCategory -->
+                        <div class="mb-3">
+                            <label class="form-label">Sub Category</label>
+                            <select class="form-select" asp-for="SubCetegoryID">
+                                <option value="">-- Select SubCategory --</option>
+                                @foreach (var sub in ViewBag.SubCategories)
+                                {
+                                    <option value="@sub.SubCetegoryID">@sub.SubCetegoryName</option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Product Name -->
+                        <div class="mb-3">
+                            <label class="form-label">Product Name</label>
+                            <input asp-for="ProductName" class="form-control" />
+                        </div>
+
+                        <!-- Product Image -->
+                        <div class="mb-3">
+                            <label class="form-label">Product Image</label>
+                            <input type="file" name="imageFile" class="form-control" />
+                        </div>
+
+                        <!-- Cost -->
+                        <div class="mb-3">
+                            <label class="form-label">Cost</label>
+                            <input asp-for="Cost" class="form-control" />
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-flex justify-content-between">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <a asp-action="Index" class="btn btn-secondary">← Back</a>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
     </div>
-</form>
 
-<form method="post" asp-action="AddProduct" enctype="multipart/form-data">
-
-    <input type="hidden" asp-for="CetegoryID" />
-
-    <div class="mb-3">
-        <label class="form-label">Sub Category</label>
-        <select class="form-select" asp-for="SubCetegoryID">
-            <option value="">-- Select SubCategories --</option>
-
-            @foreach (var sub in ViewBag.SubCategories)
-            {
-                <option value="@sub.SubCetegoryID">@sub.SubCetegoryName</option>
-            }
-        </select>
-    </div>
-
-    <div class="mb-3">
-        <label>Product Name</label>
-        <input asp-for="ProductName" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label>Product Image</label>
-        <input type="file" name="imageFile" class="form-control" />
-    </div>
-
-    <div class="mb-3">
-        <label>Cost</label>
-        <input asp-for="Cost" class="form-control" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Save</button>
-    <button asp-action="Index" type="submit" class="btn btn-danger">Back</button>
-</form>
+</div>

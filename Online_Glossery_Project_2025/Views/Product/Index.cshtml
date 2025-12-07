@@ -6,46 +6,52 @@
     int i = 1;
 }
 
-<h2>Product List</h2>
-<div style="padding-left:90% ; margin-bottom:20px">
-    <a asp-action="AddProduct" class="btn btn-info">Add Products</a>
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Product List</h2>
+        <a asp-action="AddProduct" class="btn btn-success">+ Add Product</a>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Cost</th>
+                    <th>Image</th>
+                    <th>Category</th>
+                    <th>Subcategory</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    var categoryName = Categories.FirstOrDefault(c => c.CetegoryID == p.CetegoryID)?.CetegoryName ?? "";
+                    var subCategoryName = subCategories.FirstOrDefault(s => s.SubCetegoryID == p.SubCetegoryID)?.SubCetegoryName ?? "";
+
+                    <tr>
+                        <td>@i</td>
+                        <td>@p.ProductName</td>
+                        <td>$@p.Cost</td>
+                        <td>
+                            <img src="@Url.Action("DisplayProductImage", "Product", new { id = p.Id })"
+                                 width="100" height="100" class="rounded" />
+                        </td>
+                        <td>@categoryName</td>
+                        <td>@subCategoryName</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-sm btn-primary me-1">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+
 </div>
-
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Cost</th>
-            <th>Image</th>
-            <th>Category</th>
-            <th>Subcategory</th>
-            <th>Operation</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var p in Model)
-        {
-            var categoryName = Categories.FirstOrDefault(c => c.CetegoryID == p.CetegoryID)?.CetegoryName ?? "";
-            var subCategoryName = subCategories.FirstOrDefault(s => s.SubCetegoryID == p.SubCetegoryID)?.SubCetegoryName ?? "";
-
-            <tr>
-                <td>@i</td>
-                <td>@p.ProductName</td>
-                <td>@p.Cost</td>
-                <td>
-                    <img src="@Url.Action("DisplayProductImage", "Product", new { id = p.Id })"
-                         width="150" height="150" />
-
-                </td>
-                <td>@categoryName</td>
-                <td>@subCategoryName</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@p.Id" class="btn btn-primary">Edit</a>
-                    <a asp-action="Delete" asp-route-id="@p.Id" class="btn btn-danger">Delete</a>
-            </tr>
-
-            i++;
-        }
-    </tbody>
-</table>
